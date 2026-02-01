@@ -9,58 +9,65 @@
 </head>
 
 <body>
+    <header>
+        <h2>Netflix</h2>
+    </header>
+    <main>
+        <form action="registrado.html" method="POST">
+            <h1>Formulario de Registro</h1>
 
-    <form action="" method="POST">
-        <h1>Formulario de Registro</h1>
-
-        <label for="nombre">Nombre: 
-            <input type="text" id="nombre" name="nombre" required>
-        </label>
-        <label for="apellido">Apellido: 
-            <input type="text" id="apellido" name="apellido" required>
-        </label>
-        <label for="email">Correo Electrónico: 
-            <input type="email" id="email" name="email" required>
-        </label>
-        <label for="password">
-            Contraseña: 
-            <input type="password" id="password" name="password" required>
-        </label>
-        <label for="verified-password">
-            Confirmar contraseña: 
-            <input type="password" id="verified-password" name="verified-password" required >
-        </label>
-        <label for="fechaNac">Fecha de nacimiento 
-            <input type="date" id="fechaNac" name="fechaNac">
-        </label>
-        <label for="telefono">Telefono: 
-            <input type="tel" id="telefono" name="telefono" required>
-        </label>
-        <fieldset>
-            <legend>Género</legend>
-            <label for="generoM">
-                Masculino
-                <input type="radio" id="generoM" name="genero" value="Masculino">
+            <label for="nombre">Nombre:
+                <input type="text" id="nombre" name="nombre" required>
             </label>
-            <label for="generoF">
-                Femenino
-                <input type="radio" id="generoF" name="genero" value="femenino">
+            <label for="apellido">Apellido:
+                <input type="text" id="apellido" name="apellido" required>
             </label>
-            
-            
-        </fieldset>
-        
-        
-        </label>
-        <label for="terminos">
-            <input type="checkbox" id="terminos" name="terminos" required>
-            Aceptar Terminos y Condiciones
-        </label>
+            <label for="email">Correo Electrónico:
+                <input type="email" id="email" name="email" required>
+            </label>
+            <label for="password">
+                Contraseña:
+                <input type="password" id="password" name="password" required>
+            </label>
+            <label for="verified-password">
+                Confirmar contraseña:
+                <input type="password" id="verified-password" name="verified-password" required>
+            </label>
+            <label for="fechaNac">Fecha de nacimiento:
+                <input type="date" id="fechaNac" name="fechaNac">
+            </label>
+            <label for="telefono">Teléfono:
+                <input type="tel" id="telefono" name="telefono" required>
+            </label>
+            <fieldset>
+                <legend>Género</legend>
+                <label for="generoM">
+                    Masculino
+                    <input type="radio" id="generoM" name="genero" value="Masculino">
+                </label>
+                <label for="generoF">
+                    Femenino
+                    <input type="radio" id="generoF" name="genero" value="femenino">
+                </label>
+            </fieldset>
+            <label for="preferencias">
+                Géneros favoritos:
+                <textarea name="preferencias" id="preferencias" maxlength="35"
+                    placeholder="Ej: Acción, Comedia, Drama."></textarea>
+            </label>
+            <label for="terminos">
+                <input type="checkbox" id="terminos" name="terminos" required>
+                Aceptar Terminos y Condiciones
+            </label>
 
-        <button type="submit">Registrarse</button>
-    </form>
-
-
+            <button type="submit">Registrarse</button>
+        </form>
+    </main>
+    <footer>
+        <p>Preguntas frequentes</p>
+        <p>Contacto</p>
+        <p> © Derechos Reservados</p>
+    </footer>
 </body>
 
 

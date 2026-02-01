@@ -11,15 +11,20 @@ body {
     background-image: url(utilidades/img/imagenDeFondo.png);
     background-size: cover;
     background-repeat: no-repeat;
-    background-position: inherit;
+    background-position: center center;
+    
 }
 
 form{
     width: 420px;
-    margin: 60px auto;
+    margin: 60px auto ;
     background: linear-gradient(to top, #000,#000, #4A0404);
     padding: 35px;
+    border: 1px solid #222;
+    box-shadow: 0 0 15px rgba(229, 9, 20, 0.25);
     border-radius: 8px;
+    position: relative;
+    display: block;
 }
 
 h1{
@@ -38,7 +43,8 @@ input[type="text"],
 input[type="email"],
 input[type="password"],
 input[type="date"],
-input[type="tel"]{
+input[type="tel"],
+textarea{
     width: 100%;
     padding: 10px;
     margin-top: 6px;
@@ -46,16 +52,25 @@ input[type="tel"]{
     border: none;
     border-radius: 4px;
     color: white;
+    box-shadow: 0 0 15px rgba(229, 9, 20, 0.25);
 }
-input:focus{
+input:focus,
+textarea:focus{
     outline: none;
     background-color: #444;
+}
+
+textarea{
+    min-height: 90px;
+    resize: vertical;
+    border-left: 3px solid #e50914;
 }
 
 fieldset{
     border: 1px solid #333;
     padding: 15px;
     margin-bottom: 20px;
+    box-shadow: 0 0 15px rgba(229, 9, 20, 0.25);
 }
 
 legend{
@@ -80,5 +95,23 @@ button{
     margin-top: 20px;
 }
 button:hover{
-    background-color: #f6121d;
+    background-color: #f6121d;   
+}
+header{
+    padding: 20px 40px;
+    border-bottom: 1px solid #333;
+}
+
+header h2{
+    color: #e50914;
+    font-size: 35px;
+    font-weight: bold;
+}
+
+footer{
+    background-color: #000;
+    color: #777;
+    padding: 30px 40px;
+    margin-top: 60px;
+    font-size: 14px;
 }
