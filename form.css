@@ -1,0 +1,176 @@
+*{
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    padding: 0 10px;
+    background-color: #141414;
+    font-family: Arial, Helvetica, sans-serif;
+    color: white;
+    background-image: url(utilidades/img/imagenDeFondo.png);
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center;
+    
+}
+
+form{
+    max-width: 420px;
+    width: 100%;
+    margin: 40px auto ;
+    background: linear-gradient(to top, #000,#000, #4A0404);
+    padding: 35px;
+    border: 1px solid #222;
+    box-shadow: 0 0 15px rgba(229, 9, 20, 0.25);
+    border-radius: 8px;
+    position: relative;
+    display: block;
+}
+
+h1{
+    text-align: center;
+    margin-bottom: 30px;
+    font-size: 26px;
+    font-weight: bold;
+}
+label{
+    display: block;
+    margin-bottom: 18px;
+    font-size: 14px;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="password"],
+input[type="date"],
+input[type="tel"],
+textarea{
+    width: 100%;
+    padding: 10px;
+    margin-top: 6px;
+    background-color: #333;
+    border: none;
+    border-radius: 4px;
+    color: white;
+    box-shadow: 0 0 15px rgba(229, 9, 20, 0.25);
+}
+input:focus,
+textarea:focus{
+    outline: none;
+    background-color: #444;
+}
+
+textarea{
+    min-height: 90px;
+    resize: vertical;
+    border-left: 3px solid #e50914;
+}
+
+fieldset{
+    border: 1px solid #333;
+    padding: 15px;
+    margin-bottom: 20px;
+    box-shadow: 0 0 15px rgba(229, 9, 20, 0.25);
+}
+
+legend{
+    padding: 0 10px;
+    font-size: 14px;
+}
+input[type="radio"],
+input[type="checkbox"]{
+    margin-right: 8px;
+}
+
+button{
+    width: 100%;
+    padding: 12px;
+    background-color: #e50914;
+    border: none;
+    border-radius: 4px;
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    margin-top: 20px;
+}
+button:hover{
+    background-color: #f6121d;   
+}
+header{
+    display: flex;
+    align-items: center;
+    border-bottom: 1px solid #333;
+}
+header img{
+    width: 120px;
+}
+
+footer{
+    background-color: #000;
+    padding: 60px 40px;
+    margin-top: 80px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 40px;
+    justify-content: center;
+}
+footer a{
+    display: block;
+    text-decoration: none;
+    color: #777;
+    margin-bottom: 12px;
+    font-size: 14px;
+}
+footer a:hover{
+    text-decoration: underline;
+}
+.Flinks{
+    margin-bottom: 30px;
+}
+.Fcopy{
+    margin-top: 40px;
+    font-size: 12px;
+    color: #555;
+}
+
+footer p:last-child{
+    margin-bottom: 0;
+    font-size: 12px;
+    color: #555;
+}
+@media(max-width: 480px){
+    header h2{
+        font-size: 26px;
+    }
+    form{
+        padding: 25px 20px;
+    }
+    h1{
+        font-size: 22px;
+    }
+    input{
+        font-size: 13px;
+    }
+    button{
+        font-size: 15px;
+    }
+    footer{
+        flex-direction: column;
+        padding: 40px 20px;
+    }
+    footer a{
+        font-size: 13px;
+    }
+    .Fcopy{
+        text-align: center;
+    }
+    header{
+        justify-content: center;
+    }
+    header img{
+        width: 90px;
+    }
+}

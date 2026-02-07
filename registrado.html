@@ -1,23 +1,162 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="flow.css">
-    <title>Registrado</title>
+    <title>Netflix</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: #141414;
+            font-family: Arial, Helvetica, sans-serif;
+            color: rgb(255, 255, 255);
+            background-image: url(utilidades/img/imagenDeFondo.png);
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-position: inherit;
+            overflow: hidden;
+        }
+
+        header {
+            display: flex;
+            align-items: center;
+            border-bottom: 1px solid #333;
+        }
+
+        header img {
+            width: 120px;
+        }
+
+        h1 {
+            position: relative;
+            text-align: center;
+            margin-top: 100px;
+            font-size: 80px;
+            font-weight: lighter;
+        }
+
+        footer {
+            background-color: #000;
+            padding: 60px 40px;
+            margin-top: 80px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 40px;
+            justify-content: center;
+        }
+
+        footer a {
+            display: block;
+            text-decoration: none;
+            color: #777;
+            margin-bottom: 12px;
+            font-size: 14px;
+        }
+
+        footer a:hover {
+            text-decoration: underline;
+        }
+
+        .Flinks {
+            margin-bottom: 30px;
+        }
+
+        .Fcopy {
+            margin-top: 40px;
+            font-size: 12px;
+            color: #555;
+        }
+
+        footer p:last-child {
+            margin-bottom: 0;
+            font-size: 12px;
+            color: #555;
+        }
+
+        @media(max-width: 480px) {
+            header h2 {
+                font-size: 26px;
+            }
+
+            form {
+                padding: 25px 20px;
+            }
+
+            h1 {
+                font-size: 22px;
+            }
+
+            input {
+                font-size: 13px;
+            }
+
+            button {
+                font-size: 15px;
+            }
+
+            footer {
+                flex-direction: column;
+                padding: 40px 20px;
+            }
+
+            footer a {
+                font-size: 13px;
+            }
+
+            .Fcopy {
+                text-align: center;
+            }
+
+            header {
+                justify-content: center;
+            }
+
+            header img {
+                width: 90px;
+            }
+        }
+    </style>
 </head>
+
 <body>
     <header>
-        <img src="utilidades/img/logo_netflix.png" alt="netflix">
+        <a href="index.html">
+            <img src="utilidades/img/logo_netflix.png" alt="netflix">
+        </a>
     </header>
-    
+
     <h1>Felicidades te has registrado!!</h1>
 
-    
+
     <footer>
-        <p>Preguntas frequentes</p>
-        <p>Contacto</p>
-        <p> © Derechos Reservados</p>
+        <div class="Flinks">
+            <a href="https://help.netflix.com/support/412">Preguntas frecuentes</a>
+            <a href="https://help.netflix.com/">Centro de ayuda</a>
+            <a href="https://www.netflix.com/youraccount">Cuenta</a>
+            <a href="https://media.netflix.com/">Prensa</a>
+        </div>
+
+        <div class="Flinks">
+            <a href="https://help.netflix.com/contactus">Contacto</a>
+            <a href="https://jobs.netflix.com/jobs">Empleo</a>
+            <a href="https://help.netflix.com/legal/privacy">Privacidad</a>
+            <a href="https://help.netflix.com/legal/termsofuse">Términos de uso</a>
+        </div>
+
+        <div class="Flinks">
+            <a href="https://www.netflix.com/watch">Formas de ver</a>
+            <a href="https://help.netflix.com/legal/corpinfo">Información corporativa</a>
+            <a href="https://www.netflix.com/pa/browse/genre/839338">Solo en Netflix</a>
+        </div>
+
+        <p class="Fcopy">© 2026 Netflix Clone</p>
     </footer>
 </body>
+
 </html>
