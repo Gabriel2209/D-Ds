@@ -7,14 +7,29 @@
     <title>Netflix</title>
 </head>
 <body>
-    <header>
-        <a href="index.html">
-            <img src="utilidades/img/logo_netflix.png" alt="netflix">
-        </a>
+    <header class="site-header">
+        <nav class="nav-bar">
+            <a href="index.html">
+                <img src="utilidades/img/logo_netflix.png" alt="netflix">
+            </a>
+            <button onclick="location.href='form.html'" class="btn-registrarse">Registrarse</button>
+        </nav>
+       
     </header>
     <main>
-        <h1>Hola mundo</h1>
+        <section class="hero">
+            <div class="hero-content">
+                <h1>Películas y series ilimitadas y muchos más</h1>
+                <p>A partir de USD 5.99. cancela cuando quieras</p>
+                <p>¿Quieres ver Netflix ya? Ingresa tu email para crear una cuenta o reiniciar tu membresía de Netflix.</p>
+                <div class="hero-form">
+                    <input type="email" id="email" name="email" placeholder="Email">
+                    <a href="form.html" type="button" class="btn-hero">Comenzar ></a> 
+                </div>
+            </div>
+        </section>
     </main>
+    <div class="separator"></div>
     <footer>
         <div class="Flinks">
             <a href="https://help.netflix.com/support/412">Preguntas frecuentes</a>
