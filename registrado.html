@@ -10,17 +10,17 @@
             box-sizing: border-box;
             margin: 0;
             padding: 0;
+            font-family: Arial, Helvetica, sans-serif;
         }
 
         body {
             background-color: #141414;
-            font-family: Arial, Helvetica, sans-serif;
             color: rgb(255, 255, 255);
             background-image: url(utilidades/img/imagenDeFondo.png);
             background-size: cover;
             background-repeat: no-repeat;
             background-position: inherit;
-            overflow: hidden;
+            
         }
 
         header {
@@ -32,9 +32,15 @@
         header img {
             width: 120px;
         }
+        main{
+            width: 100%;
+            height: 480px;
+            align-items: center;
+            display: flex;
+            justify-content: center;
+        }
 
         h1 {
-            position: relative;
             text-align: center;
             margin-top: 100px;
             font-size: 80px;
@@ -42,9 +48,10 @@
         }
 
         footer {
+            width: 100%;
             background-color: #000;
             padding: 60px 40px;
-            margin-top: 80px;
+            margin-top: 195px;
             display: flex;
             flex-wrap: wrap;
             gap: 40px;
@@ -125,13 +132,15 @@
 </head>
 
 <body>
-    <header>
+    <header class="hero-header">
         <a href="index.html">
             <img src="utilidades/img/logo_netflix.png" alt="netflix">
         </a>
     </header>
+    <main class="hero-main">
+        <h1>Felicidades te has registrado!!</h1>
+    </main>
 
-    <h1>Felicidades te has registrado!!</h1>
 
 
     <footer>

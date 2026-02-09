@@ -105,7 +105,13 @@ header{
     border-bottom: 1px solid #333;
 }
 header img{
-    width: 120px;
+    width: 130px;
+}
+.logo-continer{
+    width: 100%;
+    padding: 20px 60px;
+    display: flex;
+    align-items: center;
 }
 
 footer{
@@ -167,7 +173,7 @@ footer p:last-child{
     .Fcopy{
         text-align: center;
     }
-    header{
+    .logo-continer{
         justify-content: center;
     }
     header img{
