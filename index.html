@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="styles.css">
     <title>Netflix</title>
 </head>
+
 <body>
     <header class="site-header">
         <nav class="nav-bar">
@@ -14,18 +16,22 @@
             </a>
             <button onclick="location.href='form.html'" class="btn-registrarse">Registrarse</button>
         </nav>
-       
+
     </header>
     <main>
         <section class="hero">
             <div class="hero-content">
                 <h1>Películas y series ilimitadas y muchos más</h1>
                 <p>A partir de USD 5.99. cancela cuando quieras</p>
-                <p>¿Quieres ver Netflix ya? Ingresa tu email para crear una cuenta o reiniciar tu membresía de Netflix.</p>
-                <div class="hero-form">
-                    <input type="email" id="email" name="email" placeholder="Email" required>
-                    <a href="form.html" type="button" class="btn-hero">Comenzar ></a> 
-                </div>
+                <p>¿Quieres ver Netflix ya? Ingresa tu email para crear una cuenta o reiniciar tu membresía de Netflix.
+                </p>
+
+                <form action="form.html" id="hero-form" class="hero-form">
+                    <input type="email" id="email-form" name="email" placeholder="Email" required>
+                    <button type="submit" class="btn-hero">Comenzar >
+                    </button>
+                </form>
+
             </div>
         </section>
     </main>
@@ -53,5 +59,7 @@
 
         <p class="Fcopy">© 2026 Netflix Clone</p>
     </footer>
+    <script src="script.js"></script>
 </body>
+
 </html>
