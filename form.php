@@ -1,3 +1,6 @@
+
+
+
 <!DOCTYPE html>
 <html>
 
@@ -28,6 +31,7 @@
             </label>
             <label for="email">Correo Electrónico:
                 <input type="email" id="email" name="email" required>
+                <p id="error-email"></p>
             </label>
             <label for="password">
                 Contraseña:
@@ -36,6 +40,7 @@
             <label for="verified-password">
                 Confirmar contraseña:
                 <input type="password" id="verified-password" name="verified-password" required>
+                <p id="error-pass"></p>
             </label>
             <label for="fechaNac">Fecha de nacimiento:
                 <input type="date" id="fechaNac" name="fechaNac">
