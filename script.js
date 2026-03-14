@@ -24,66 +24,76 @@ calendario();//Llamamos o ejecutamos la funcion para que haga lo declarado arrib
 
 //Validaciones 
 //addEventListener es una funcion que queda a la escucha o a la espera del input del usuario
-document.getElementById("nombre").addEventListener("input",  () => {
+nombre.addEventListener("input",  () => {
     //funcion Flecha o funcion anonima para realizar la validacion 
-    if (nombre.value.trim().length >= 5) {//si la longitud del nombre es mayor o igual a 5 hace lo siguiente
-        btnRegis.disabled = false;//Activa el boton de enviar 
+    if (nombre.value.trim().length >= 5) {//si la longitud del nombre es mayor o igual a 5 hace lo siguiente 
         nombre.style.border = "none"//desactiva el borde rojo cuando pasa la validacion
-    }else{//en cualquier otro caso el boton enviar esta desactivado 
+    }else{
         nombre.style.border = "2px solid red"//pone un borde rojo al campo para indicar que algo esta mal
-        btnRegis.disabled = true;
     }
+    validarForm()//Activa o desactiva el boton de enviar
 })
 //validacion para el email
 email.addEventListener("input", () => {
     let regex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/; //expresion regular para validar el email
     let valido = regex.test(email.value.trim())// guardamos true o false si pasa la validacion
     if(valido){//si es true habilita el boton 
-        btnRegis.disabled = false;
         email.style.border = "none"
         errorEmail.textContent = ""
-    }else{//si no pasa la validacion se mantiene inactivo
+    }else{
         errorEmail.textContent = "Email invalido"
         email.style.border = "2px solid red"
-        btnRegis.disabled = true;
     }
+    validarForm()//Activa o desactiva el boton de enviar
 })
 //validacion para la cedula
 cedula.addEventListener("input", () => {
     let regex =   /^(PE|E|N|[23456789](?:AV|PI)?|1[0123]?(?:AV|PI)?)-(\d{1,4})-(\d{1,6})$/i;//expresion regular para validar la cedula panameña
     let valido = regex.test(cedula.value.trim())//guardamos true o false si pasa la validacion
     if(valido){ //si pasa la validacion de activa el boton de enviar
-        btnRegis.disabled = false;
         cedula.style.border = "none";
-    }else{//si no pasa la validacion se mantiene inactivo
+    }else{
         cedula.style.border = "2px solid red";
-        btnRegis.disabled = true;
     }
+    validarForm()//Activa o desactiva el boton de enviar
 })
 //validacion de la contrasena
 vpass.addEventListener("input", () => {
     if(pass.value === vpass.value){
-        pass.style.border = "2px solid green"
         pass.style.border = "none"
         vpass.style.border = "none"
-        btnRegis.disabled = false;
         errorpass.textContent = ""
     }else{
         errorpass.textContent = "Las constraseñas deben coincidir"
         pass.style.border = "2px solid red"
         vpass.style.border = "2px solid red"
-        btnRegis.disabled = true;
     }
+    validarForm()//Activa o desactiva el boton de enviar
 })
+//validacion de que sea un numero telefonico
 telf.addEventListener("input", () => {
+    //expresion regular para validar que sea un numero de telefono 
     let regex = /[\(]?[\+]?(\d{2}|\d{3})[\)]?[\s]?((\d{6}|\d{8})|(\d{3}[\*\.\-\s]){3}|(\d{2}[\*\.\-\s]){4}|(\d{4}[\*\.\-\s]){2})|\d{8}|\d{10}|\d{12}/;
     let valido = regex.test(telf.value.trim())
     if(valido){
-        telf.style.border = "2px solid green"
         telf.style.border = "none"
+    }else{
+        telf.style.border = "2px solid red";
+    }
+    validarForm()//Activa o desactiva el boton de enviar
+})
+
+function validarForm(){
+    //funcion que valida si el formulario tienes los datos para activar el boton de enviar
+    if(
+        nombre.value.trim().length >= 5 && //que el campo nombre tenga mas de 5 caracteres
+        cedula.value !== "" && // que el campo cedula no este vacio
+        email.value !== "" &&// que el campo email no este vacio
+        telf.value !== "" &&// que el campo telefono no este vacio
+        pass.value === vpass.value // que las contrasenas sean iguales
+    ){
         btnRegis.disabled = false;
     }else{
-        telf.style.border = "2px solid red"
         btnRegis.disabled = true;
     }
-})
+}

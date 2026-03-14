@@ -43,7 +43,7 @@
                 <p id="error-pass"></p>
             </label>
             <label for="fechaNac">Fecha de nacimiento:
-                <input type="date" id="fechaNac" name="fechaNac">
+                <input type="date" id="fechaNac" name="fechaNac" required>
             </label>
             <label for="telefono">Teléfono:
                 <input type="tel" id="telefono" name="telefono" required>
