@@ -9,6 +9,13 @@ let pass = document.getElementById("password");
 let vpass = document.getElementById('verified-password');
 let errorEmail = document.getElementById("error-email");
 let errorpass = document.getElementById("error-pass");
+//variables de validacion
+let nombreValido = false;
+let cedulaValido = false;
+let emailValido = false;
+let telfValido = false;
+let passValido = false;
+
 
 //Funcion que ajusta el calendarios para preever que no se coloquen dias futuros
 const calendario = () =>{
@@ -28,23 +35,27 @@ nombre.addEventListener("input",  () => {
     //funcion Flecha o funcion anonima para realizar la validacion 
     if (nombre.value.trim().length >= 5) {//si la longitud del nombre es mayor o igual a 5 hace lo siguiente 
         nombre.style.border = "none"//desactiva el borde rojo cuando pasa la validacion
+        nombreValido = true;
     }else{
+        nombreValido = false;
         nombre.style.border = "2px solid red"//pone un borde rojo al campo para indicar que algo esta mal
     }
-    validarForm()//Activa o desactiva el boton de enviar
+    validarForm()
 })
 //validacion para el email
 email.addEventListener("input", () => {
     let regex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/; //expresion regular para validar el email
     let valido = regex.test(email.value.trim())// guardamos true o false si pasa la validacion
     if(valido){//si es true habilita el boton 
+        emailValido = true;
         email.style.border = "none"
         errorEmail.textContent = ""
     }else{
+        emailValido = false;
         errorEmail.textContent = "Email invalido"
         email.style.border = "2px solid red"
     }
-    validarForm()//Activa o desactiva el boton de enviar
+    validarForm()
 })
 //validacion para la cedula
 cedula.addEventListener("input", () => {
@@ -52,10 +63,12 @@ cedula.addEventListener("input", () => {
     let valido = regex.test(cedula.value.trim())//guardamos true o false si pasa la validacion
     if(valido){ //si pasa la validacion de activa el boton de enviar
         cedula.style.border = "none";
+        cedulaValido = true;
     }else{
+        cedulaValido = false;
         cedula.style.border = "2px solid red";
     }
-    validarForm()//Activa o desactiva el boton de enviar
+    validarForm()
 })
 //validacion de la contrasena
 vpass.addEventListener("input", () => {
@@ -63,12 +76,14 @@ vpass.addEventListener("input", () => {
         pass.style.border = "none"
         vpass.style.border = "none"
         errorpass.textContent = ""
+        passValido = true;
     }else{
+        passValido = false;
         errorpass.textContent = "Las constraseñas deben coincidir"
         pass.style.border = "2px solid red"
         vpass.style.border = "2px solid red"
     }
-    validarForm()//Activa o desactiva el boton de enviar
+   validarForm()
 })
 //validacion de que sea un numero telefonico
 telf.addEventListener("input", () => {
@@ -77,20 +92,22 @@ telf.addEventListener("input", () => {
     let valido = regex.test(telf.value.trim())
     if(valido){
         telf.style.border = "none"
+        telfValido = true;
     }else{
+        telfValido = false
         telf.style.border = "2px solid red";
     }
-    validarForm()//Activa o desactiva el boton de enviar
+    validarForm()
 })
 
 function validarForm(){
     //funcion que valida si el formulario tienes los datos para activar el boton de enviar
     if(
-        nombre.value.trim().length >= 5 && //que el campo nombre tenga mas de 5 caracteres
-        cedula.value !== "" && // que el campo cedula no este vacio
-        email.value !== "" &&// que el campo email no este vacio
-        telf.value !== "" &&// que el campo telefono no este vacio
-        pass.value === vpass.value // que las contrasenas sean iguales
+        nombreValido && //que el campo nombre tenga mas de 5 caracteres
+        cedulaValido && // que el campo cedula no este vacio
+        emailValido &&// que el campo email no este vacio
+        telfValido &&// que el campo telefono no este vacio
+        passValido // que las contrasenas sean iguales
     ){
         btnRegis.disabled = false;
     }else{
