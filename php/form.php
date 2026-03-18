@@ -1,4 +1,40 @@
+<?php
 
+if(isset($_POST['btnRegistrarse'])){
+    $nombre = "";
+    $cedula = "";
+    $email = "";
+    $password = "";
+    $fechaNac = "";
+    $telefono = "";
+    $preferencias = "";
+    $genero = "";
+
+
+    if(isset($_POST['nombre'])){ $nombre = $_POST['nombre'];}
+    
+    if(isset($_POST['cedula'])){$cedula = $_POST['cedula'];}
+    
+    if(isset($_POST['email'])){$email = $_POST['email'];}
+    
+    if(isset($_POST['password'])){$password = $_POST['password'];}
+    
+    if(isset($_POST['fechaNac'])){$fechaNac = $_POST['fechaNac'];}
+    
+    if(isset($_POST['telefono'])){$telefono = $_POST['telefono'];}
+    
+    if(isset($_POST['preferencias'])){$preferencias = $_POST['preferencias'];}
+    
+    if(isset($_POST['genero'])){$genero = $_POST['genero'];}
+    
+    // echo '<pre>';
+    // print_r($_POST);
+    // echo '</pre>';
+}
+
+
+
+?>
 
 
 <!DOCTYPE html>
@@ -8,19 +44,19 @@
     <title>Netflix</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="form.css">
+    <link rel="stylesheet" href="../css/form.css">
 </head>
 
 <body>
     <header>
         <div class="logo-continer">
-            <a href="index.html">
-                <img src="utilidades/img/logo_netflix.png" alt="netflix">
+            <a href="../html/index.html">
+                <img src="../utilidades/img/logo_netflix.png" alt="netflix">
             </a>
         </div>
     </header>
     <main>
-        <form action="registrado.html" method="POST">
+        <form action="" method="POST">
             <h1>Formulario de Registro</h1>
 
             <label for="nombre">Nombre Completo:
@@ -61,7 +97,7 @@
             </fieldset>
             <label for="preferencias">
                 Géneros favoritos:
-                <textarea name="preferencias" id="preferencias" maxlength="35"
+                <textarea name="preferencias" id="preferencias"  maxlength="35"
                     placeholder="Ej: Acción, Comedia, Drama."></textarea>
             </label>
             <label for="terminos">
@@ -69,7 +105,7 @@
                 Aceptar Terminos y Condiciones
             </label>
 
-            <button type="submit" id="btnRegistrarse">Registrarse</button>
+            <button type="submit" id="btnRegistrarse" name="btnRegistrarse">Registrarse</button>
         </form>
     </main>
     <footer>
@@ -95,7 +131,7 @@
 
         <p class="Fcopy">© 2026 Netflix Clone</p>
     </footer>
-    <script src="script.js"></script>
+    <script src="../js/script.js"></script>
 </body>
 
 

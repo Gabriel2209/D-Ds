@@ -60,7 +60,7 @@ header img {
 .hero {
     position: relative;
     min-height: 100vh;
-    background-image: url(utilidades/img/fondo_pantalla_principal.jpg);
+    background-image: url(../utilidades/img/fondo_pantalla_principal.jpg);
     background-size: cover;
     background-position: center;
     display: flex;

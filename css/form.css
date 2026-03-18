@@ -9,7 +9,7 @@ body {
     background-color: #141414;
     font-family: Arial, Helvetica, sans-serif;
     color: white;
-    background-image: url(utilidades/img/imagenDeFondo.png);
+    background-image: url(../utilidades/img/imagenDeFondo.png);
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center center;
