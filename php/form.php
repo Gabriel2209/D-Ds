@@ -53,6 +53,34 @@ if(isset($_POST['btnRegistrarse'])){
             }catch (PDOException $e){
                 echo "Error al guardar los datos. ". $e->getMessage();
             }
+        }elseif($id_persona > 0){
+            try{
+                $sqlUpt = "UPDATE t_datos_personales 
+                SET nombre_completo = :nombre, 
+                cedula = :cedula, 
+                correo = :correo, 
+                password = :password, 
+                fecha_nacimiento = :fechaNac, 
+                telefono = :telefono, 
+                preferencias = :preferencias, 
+                genero = :genero
+                WHERE id_persona = :id_persona";
+                $stmt = $pdo->prepare($sqlUpt);
+                
+                $stmt->bindParam(":id_persona", $id_persona);
+                $stmt->bindParam(":nombre_completo", $nombre);
+                $stmt->bindParam(":cedula", $cedula);
+                $stmt->bindParam(":correo", $email);
+                $stmt->bindParam(":password", $password);
+                $stmt->bindParam(":fecha_nacimiento", $fechaNac);
+                $stmt->bindParam(":telefono", $telefono);
+                $stmt->bindParam(":genero", $genero);
+                $stmt->bindParam(":preferencias", $preferencias);
+                $stmt->execute();
+                echo"Datos actualzados correctamente. ";
+            } catch(PDOException $e){
+                echo "Algo salio mal al Actualizar los datos. " . $e->getMessage();
+            }
         }
     
     }
