@@ -13,7 +13,7 @@ class Conn extends PDO
             parent::__construct(
                 "mysql:host=". $this->hostDB . 
                 ";dbname=" . $this->nameDB . 
-                ";", $this->userDb,
+                ";", $this->userDB,
                 $this->passDB,
                 array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION));
         }catch(PDOException $e){

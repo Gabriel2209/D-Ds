@@ -15,6 +15,16 @@ body {
     background-position: center center;
     
 }
+.table-cont{
+    
+    padding: 6px 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.table-cont th {
+    padding-right: 15px;
+}
 
 form{
     max-width: 420px;

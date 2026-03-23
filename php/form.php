@@ -1,4 +1,6 @@
 <?php
+include "conn.php";
+$pdo = new Conn();
 
 if(isset($_POST['btnRegistrarse'])){
     $nombre = "";
@@ -26,10 +28,13 @@ if(isset($_POST['btnRegistrarse'])){
     if(isset($_POST['preferencias'])){$preferencias = $_POST['preferencias'];}
     
     if(isset($_POST['genero'])){$genero = $_POST['genero'];}
-    
-    // echo '<pre>';
-    // print_r($_POST);
-    // echo '</pre>';
+
+    if(strlen(trim($nombre)) >= 5 && strlen(trim($cedula)) >= 7 && strlen(trim($email)) >= 8 && $password != "" && strlen(trim($fechaNac)) == 10 && $telefono != "" && $genero != "" ){
+        // echo '<pre>';
+        // print_r($_POST);
+        // echo '</pre>';
+
+    }
 }
 
 
@@ -108,6 +113,41 @@ if(isset($_POST['btnRegistrarse'])){
             <button type="submit" id="btnRegistrarse" name="btnRegistrarse">Registrarse</button>
         </form>
     </main>
+    
+    <div class="table-cont">
+        <table id="user-table" class="user-table" >
+            <tr>
+                <th>Nombre Completo</th>
+                <th>Cedula</th>
+                <th>Correo Electrónico</th>
+                <th>Fecha de Nacimiento</th>
+                <th>Telefono</th>
+                <th>Genero</th>
+                <th>Preferencias</th>
+                <th>&nbsp;</th>
+            </tr>
+            <tr>
+                <?php 
+                    $sql = "SELECT * FROM t_datos_personales ORDER BY nombre_completo";
+                    $stmt = $pdo->prepare($sql);
+                    $stmt->execute();
+                    $PERSONAS = $stmt->fetchAll(PDO::FETCH_ASSOC);
+                    foreach($PERSONAS as $PERSONA){
+                        echo "<tr>";
+                            echo "<td>". $PERSONA['nombre_completo'] ."</td>";
+                            echo "<td>". $PERSONA['cedula'] ."</td>";
+                            echo "<td>". $PERSONA['correo'] ."</td>";
+                            echo "<td>".date("y-m-d",strtotime($PERSONA['fecha_nacimiento']))  ."</td>";
+                            echo "<td>". $PERSONA['telefono'] ."</td>";
+                            echo "<td>". $PERSONA['genero'] ."</td>";
+                            echo "<td>". $PERSONA['preferencias'] ."</td>";
+                        echo "</tr>";
+                    }
+                ?>
+            </tr>
+        </table>
+    </div>
+
     <footer>
         <div class="Flinks">
             <a href="https://help.netflix.com/support/412">Preguntas frecuentes</a>
