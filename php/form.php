@@ -11,8 +11,10 @@ if(isset($_POST['btnRegistrarse'])){
     $telefono = "";
     $preferencias = "";
     $genero = "";
+    $id_persona = 0;
 
-
+    if(isset($_POST['id_persona'])){$id_persona = $_POST['id_persona'];}
+    
     if(isset($_POST['nombre'])){ $nombre = $_POST['nombre'];}
     
     if(isset($_POST['cedula'])){$cedula = $_POST['cedula'];}
@@ -33,7 +35,26 @@ if(isset($_POST['btnRegistrarse'])){
         // echo '<pre>';
         // print_r($_POST);
         // echo '</pre>';
-
+        if($id_persona == 0){
+            try{
+                $sqlInse = "INSERT INTO t_datos_personales (nombre_completo, cedula, correo, password, fecha_nacimiento, telefono, preferencias, genero )
+                VALUES(:nombre, :cedula, :email, :password, :fechaNac, :telefono, :preferencias, :genero, )";
+                $stmt = pdo->prepadre($sqlinse);
+                $stmt = bindParam(":nombre", $nombre);
+                $stmt = bindParam(":cedula", $cedula);
+                $stmt = bindParam(":email", $email);
+                $stmt = bindParam(":password", $password);
+                $stmt = bindParam(":fechaNac", $fechaNac);
+                $stmt = bindParam(":telefono", $telefono);
+                $stmt = bindParam(":preferencias", $preferencias);
+                $stmt = bindParam(":genero", $genero);
+                $stmt->execute();
+                echo "Datos guardado con Exito."
+            }catch (PDOException $e){
+                echo "Error al guardar los datos. ". $e->getMessage();
+            }
+        }
+    
     }
 }
 
@@ -66,6 +87,7 @@ if(isset($_POST['btnRegistrarse'])){
 
             <label for="nombre">Nombre Completo:
                 <input type="text" id="nombre" name="nombre" required>
+                <input type="hidden" name="id_persona" >
             </label>
             <label for="cedula">Cedula:
                 <input type="text" id="cedula" name="cedula" required>
