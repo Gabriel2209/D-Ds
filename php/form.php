@@ -37,42 +37,42 @@ if(isset($_POST['btnRegistrarse'])){
         // echo '</pre>';
         if($id_persona == 0){
             try{
-                $sqlInse = "INSERT INTO t_datos_personales (nombre_completo, cedula, correo, password, fecha_nacimiento, telefono, preferencias, genero )
-                VALUES(:nombre, :cedula, :email, :password, :fechaNac, :telefono, :preferencias, :genero, )";
-                $stmt = pdo->prepadre($sqlinse);
-                $stmt = bindParam(":nombre", $nombre);
-                $stmt = bindParam(":cedula", $cedula);
-                $stmt = bindParam(":email", $email);
-                $stmt = bindParam(":password", $password);
-                $stmt = bindParam(":fechaNac", $fechaNac);
-                $stmt = bindParam(":telefono", $telefono);
-                $stmt = bindParam(":preferencias", $preferencias);
-                $stmt = bindParam(":genero", $genero);
+                $sqlInse = "INSERT INTO t_datos_personales (nombre_completo, cedula, correo, contrasena, fecha_nacimiento, telefono, genero, generos_fav )
+                VALUES(:nombre, :cedula, :email, :contrasena, :fecha_nacimiento, :telefono, :genero, :generos_fav )";
+                $stmt = $pdo->prepare($sqlInse);
+                $stmt->bindParam(":nombre", $nombre);
+                $stmt->bindParam(":cedula", $cedula);
+                $stmt->bindParam(":email", $email);
+                $stmt->bindParam(":contrasena", $password);
+                $stmt->bindParam(":fecha_nacimiento", $fechaNac);
+                $stmt->bindParam(":telefono", $telefono);
+                $stmt->bindParam(":genero", $genero);
+                $stmt->bindParam(":generos_fav", $preferencias);
                 $stmt->execute();
-                echo "Datos guardado con Exito."
+                echo "Datos guardado con Exito.";
             }catch (PDOException $e){
                 echo "Error al guardar los datos. ". $e->getMessage();
             }
         }elseif($id_persona > 0){
             try{
                 $sqlUpt = "UPDATE t_datos_personales 
-                SET nombre_completo = :nombre, 
+                SET nombre_completo = :nombre_completo, 
                 cedula = :cedula, 
                 correo = :correo, 
-                password = :password, 
-                fecha_nacimiento = :fechaNac, 
+                contrasena = :contrasena, 
+                fecha_nacimiento = :fecha_nacimiento, 
                 telefono = :telefono, 
-                preferencias = :preferencias, 
-                genero = :genero
+                genero = :genero, 
+                generos_fav = :generos_fav
                 WHERE id_persona = :id_persona";
                 $stmt = $pdo->prepare($sqlUpt);
                 
                 $stmt->bindParam(":id_persona", $id_persona);
-                $stmt->bindParam(":nombre_completo", $nombre);
+                $stmt->bindParam(":nombre", $nombre);
                 $stmt->bindParam(":cedula", $cedula);
                 $stmt->bindParam(":correo", $email);
-                $stmt->bindParam(":password", $password);
-                $stmt->bindParam(":fecha_nacimiento", $fechaNac);
+                $stmt->bindParam(":contrasena", $password);
+                $stmt->bindParam(":fechaNac", $fechaNac);
                 $stmt->bindParam(":telefono", $telefono);
                 $stmt->bindParam(":genero", $genero);
                 $stmt->bindParam(":preferencias", $preferencias);
@@ -115,7 +115,7 @@ if(isset($_POST['btnRegistrarse'])){
 
             <label for="nombre">Nombre Completo:
                 <input type="text" id="nombre" name="nombre" required>
-                <input type="hidden" name="id_persona" >
+                <input type="hidden" name="id_persona" value="<?php echo isset($persona) ? $persona['id_persona'] : 0; ?>">
             </label>
             <label for="cedula">Cedula:
                 <input type="text" id="cedula" name="cedula" required>
@@ -167,6 +167,7 @@ if(isset($_POST['btnRegistrarse'])){
     <div class="table-cont">
         <table id="user-table" class="user-table" >
             <tr>
+                <th>Editar</th>
                 <th>Nombre Completo</th>
                 <th>Cedula</th>
                 <th>Correo Electrónico</th>
@@ -174,6 +175,7 @@ if(isset($_POST['btnRegistrarse'])){
                 <th>Telefono</th>
                 <th>Genero</th>
                 <th>Preferencias</th>
+                <th>Eliminar</th>
                 <th>&nbsp;</th>
             </tr>
             <tr>
@@ -184,17 +186,20 @@ if(isset($_POST['btnRegistrarse'])){
                     $PERSONAS = $stmt->fetchAll(PDO::FETCH_ASSOC);
                     foreach($PERSONAS as $PERSONA){
                         echo "<tr>";
+                            echo "<td><a href='?editar=".$PERSONA['id_persona']."'>Editar</a></td>";
                             echo "<td>". $PERSONA['nombre_completo'] ."</td>";
                             echo "<td>". $PERSONA['cedula'] ."</td>";
                             echo "<td>". $PERSONA['correo'] ."</td>";
                             echo "<td>".date("y-m-d",strtotime($PERSONA['fecha_nacimiento']))  ."</td>";
                             echo "<td>". $PERSONA['telefono'] ."</td>";
                             echo "<td>". $PERSONA['genero'] ."</td>";
-                            echo "<td>". $PERSONA['preferencias'] ."</td>";
+                            echo "<td>". $PERSONA['generos_fav'] ."</td>";
+                            echo "<td><a href='?eliminar=".$PERSONA['id_persona']."'>Eliminar</a></td>";
                         echo "</tr>";
                     }
                 ?>
             </tr>
+            
         </table>
     </div>
 
