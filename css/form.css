@@ -16,16 +16,59 @@ body {
     
 }
 .table-cont{
-    
-    padding: 6px 12px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+  width: 100%;
+  overflow: hidden;
+  margin-top: 12px;
 }
-.table-cont th {
-    padding-right: 15px;
+.user-table{
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 14px;
+  font-family: 'Segoe UI', Tahoma, sans-serif;
+  border-radius: 5px;
+  background-color: #fff;
+  overflow: hidden;
 }
-
+.user-table th{
+  text-align: left;
+  padding: 12px 16px;
+  background-color: #222;
+  color: #fff;
+  font-weight: 600;
+  border-bottom: 1px solid #0e0e0e;
+}
+.user-table td{
+  font-weight: 600;
+  color: #222;
+  padding: 12px 16px;
+  border-bottom: 1px solid #f0f0f0;
+}
+.user-table tr:hover{
+  background-color: #d6cece;
+}
+.user-table a{
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.2s ease;
+}
+.user-table a:first-child{
+  color: #3b82f6;
+}
+.user-table a:first-child:hover{
+  color: #074adb;
+}
+.user-table td:last-child a:last-child{
+  color: #3b82f6;
+}
+.user-table td:last-child a:last-child:hover{
+  color: #e50914;
+}
+.user-table tr:first-child th:first-child{
+  border-top-left-radius: 8px;
+}
+.user-table tr:first-child th:last-child{
+  border-top-right-radius: 8px;
+}
 form{
     max-width: 420px;
     width: 100%;
