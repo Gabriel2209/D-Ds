@@ -102,15 +102,38 @@ telf.addEventListener("input", () => {
 
 function validarForm(){
     //funcion que valida si el formulario tienes los datos para activar el boton de enviar
+    let enEdicion = document.querySelector("input[name='id_persona']").value > 0;//variable para activar el boton si esta en modo editar
     if(
         nombreValido && //que el campo nombre tenga mas de 5 caracteres
         cedulaValido && // que el campo cedula no este vacio
         emailValido &&// que el campo email no este vacio
         telfValido &&// que el campo telefono no este vacio
-        passValido // que las contrasenas sean iguales
+        (passValido || enEdicion) // que las contrasenas sean iguales
     ){
         btnRegis.disabled = false;
     }else{
         btnRegis.disabled = true;
     }
 }
+function confirmarEliminar(id){
+    Swal.fire({
+        title: "¿Eliminar?",
+        text: "No se puede deshacer",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonText: "Sí",
+        cancelButtonText: "No"
+    }).then((resultado) => {
+        if(resultado.isConfirmed){
+            window.location = "?eliminar=" + id;
+        }
+    });
+}
+window.addEventListener("load", () =>{
+    if(nombre.value.trim().length >= 5 )nombreValido = true;
+    if(cedula.value.trim() !== "" )cedulaValido = true;
+    if(email.value.trim() !== "" )emailValido = true;
+    if(telf.value.trim() !== "" )telfValido = true;
+
+    validarForm();
+})

@@ -24,6 +24,8 @@ if(isset($_GET['eliminar'])){
         $stmt = $pdo->prepare($sql);
         $stmt->bindParam(":id", $id);
         $stmt->execute();
+        header("location: " . $_SERVER['PHP_SELF'] . "?msg=eliminado");
+        exit();
     }catch(PDOException $e){
         echo "Error al eliminar: " . $e->getMessage();
     }
@@ -86,7 +88,9 @@ if(isset($_POST['btnRegistrarse'])){
                 $stmt->bindParam(":genero", $genero);
                 $stmt->bindParam(":generos_fav", $preferencias);
                 $stmt->execute();
-                echo "Datos guardado con Exito.";
+                header("location: " .$_SERVER['PHP_SELF']. "?msg=creado");
+                exit();
+                
             }catch (PDOException $e){
                 echo "Error al guardar los datos. ". $e->getMessage();
             }
@@ -131,7 +135,9 @@ if(isset($_POST['btnRegistrarse'])){
                 $stmt->bindParam(":genero", $genero);
                 $stmt->bindParam(":generos_fav", $preferencias);
                 $stmt->execute();
-                echo"Datos actualzados correctamente. ";
+                header("location: " .$_SERVER['PHP_SELF'] . "?msg=actualizado");
+                exit();
+                
             } catch(PDOException $e){
                 echo "Algo salio mal al Actualizar los datos. " . $e->getMessage();
             }
@@ -165,7 +171,9 @@ if(isset($_POST['btnRegistrarse'])){
     </header>
     <main>
         <form action="" method="POST">
-            <h1>Formulario de Registro</h1>
+            <h1>
+                <?php echo isset($persona) ? "Actualizar Usuario" : "Formulario de Registro" ?>
+            </h1>
 
             <label for="nombre">Nombre Completo:
                 <input type="text" id="nombre" name="nombre" value="<?php echo isset($persona) ? htmlspecialchars($persona['nombre_completo']) : ''; ?>" required>
@@ -210,11 +218,13 @@ if(isset($_POST['btnRegistrarse'])){
                     placeholder="Ej: Acción, Comedia, Drama."><?php echo isset($persona) ? htmlspecialchars($persona['generos_fav']) : '';?></textarea>
             </label>
             <label for="terminos">
-                <input type="checkbox" id="terminos" name="terminos" required>
+                <input type="checkbox" id="terminos" name="terminos"<?php if(isset($persona)) echo "checked" ?>  required>
                 Aceptar Terminos y Condiciones
             </label>
 
-            <button type="submit" id="btnRegistrarse" name="btnRegistrarse">Registrarse</button>
+            <button type="submit" id="btnRegistrarse" name="btnRegistrarse">
+                <?php echo isset($persona) ? "Actualizar" : "Registrarse"; ?>
+            </button>
         </form>
     </main>
     
@@ -247,7 +257,7 @@ if(isset($_POST['btnRegistrarse'])){
                         echo "<td>". htmlspecialchars($PERSONA['telefono']) ."</td>";
                         echo "<td>". htmlspecialchars($PERSONA['genero']) ."</td>";
                         echo "<td>". htmlspecialchars($PERSONA['generos_fav']) ."</td>";
-                        echo "<td><a href='?eliminar=".$PERSONA['id_persona']."'>Eliminar</a></td>";
+                        echo "<td><a href='#' onclick='confirmarEliminar(".$PERSONA['id_persona'].")' >Eliminar</a></td>";
                     echo "</tr>";
                 }
             ?>
@@ -279,7 +289,25 @@ if(isset($_POST['btnRegistrarse'])){
 
         <p class="Fcopy">© 2026 Netflix Clone</p>
     </footer>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script><!-- libreria para poner alerta bonitas que alert()  -->
     <script src="../js/script.js"></script>
+    <script>
+        <?php if(isset($_GET['msg'])){ ?>
+
+            <?php if($_GET['msg'] == "creado"){ ?>
+                Swal.fire("Listo", "Usuario registrado", "success");
+            <?php } ?>
+
+            <?php if($_GET['msg'] == "actualizado"){ ?>
+                Swal.fire("Listo", "Datos actualizados", "success");
+            <?php } ?>
+
+            <?php if($_GET['msg'] == "eliminado"){ ?>
+                Swal.fire("Eliminado", "Usuario eliminado", "warning");
+            <?php } ?>
+
+        <?php } ?>
+    </script>
 </body>
 
 
