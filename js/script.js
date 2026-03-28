@@ -115,8 +115,9 @@ function validarForm(){
         btnRegis.disabled = true;
     }
 }
+
 function confirmarEliminar(id){
-    Swal.fire({
+    Swal.fire({//libreria para la alertas bonitas 
         title: "¿Eliminar?",
         text: "No se puede deshacer",
         icon: "warning",
@@ -129,6 +130,7 @@ function confirmarEliminar(id){
         }
     });
 }
+//Revalidar el formulario para activar el boton 
 window.addEventListener("load", () =>{
     if(nombre.value.trim().length >= 5 )nombreValido = true;
     if(cedula.value.trim() !== "" )cedulaValido = true;

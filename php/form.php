@@ -1,36 +1,44 @@
 <?php
-include "conn.php";
-$pdo = new Conn();
+include "conn.php"; // conexión a la BD
+$pdo = new Conn(); // instancia de la conexión
 
+// ----------- EDITAR -----------
 if(isset($_GET['editar'])){
-    $id = $_GET['editar'];
+    $id = $_GET['editar']; // obtenemos el id por URL
     try{
         $sql = "SELECT * FROM t_datos_personales WHERE id_persona = :id";
         $stmt = $pdo->prepare($sql);
-        $stmt->bindParam(':id',$id);
+        $stmt->bindParam(':id',$id); // enlazamos el parámetro
         $stmt->execute();
 
-        $persona = $stmt->fetch(PDO::FETCH_ASSOC);
+        $persona = $stmt->fetch(PDO::FETCH_ASSOC); // obtenemos los datos
     }catch(PDOException $e){
         echo "Algo salio mal al editar ". $e->getMessage();
     }
-
 }
+
+// ----------- ELIMINAR -----------
 if(isset($_GET['eliminar'])){
-    $id = $_GET['eliminar'];
+    $id = $_GET['eliminar']; // id a eliminar
 
     try{
         $sql = "DELETE FROM t_datos_personales WHERE id_persona = :id";
         $stmt = $pdo->prepare($sql);
         $stmt->bindParam(":id", $id);
         $stmt->execute();
+
+        // redirección con mensaje
         header("location: " . $_SERVER['PHP_SELF'] . "?msg=eliminado");
         exit();
     }catch(PDOException $e){
         echo "Error al eliminar: " . $e->getMessage();
     }
 }
+
+// ----------- INSERTAR / ACTUALIZAR -----------
 if(isset($_POST['btnRegistrarse'])){
+
+    // variables vacías
     $nombre = "";
     $cedula = "";
     $email = "";
@@ -43,41 +51,38 @@ if(isset($_POST['btnRegistrarse'])){
     $id_persona = 0;
     $terminos = "";
 
+    // capturar datos del formulario
     if(isset($_POST['id_persona'])){$id_persona = $_POST['id_persona'];}
-    
     if(isset($_POST['nombre'])){ $nombre = $_POST['nombre'];}
-    
     if(isset($_POST['cedula'])){$cedula = $_POST['cedula'];}
-    
     if(isset($_POST['email'])){$email = $_POST['email'];}
-    
     if(isset($_POST['password'])){$password = $_POST['password'];}
-
     if(isset($_POST['verified-password'])){$verified_password = $_POST['verified-password'];}
-    
     if(isset($_POST['fechaNac'])){$fechaNac = $_POST['fechaNac'];}
-    
     if(isset($_POST['telefono'])){$telefono = $_POST['telefono'];}
-    
     if(isset($_POST['preferencias'])){$preferencias = $_POST['preferencias'];}
-    
     if(isset($_POST['genero'])){$genero = $_POST['genero'];}
-
     if(isset($_POST['terminos'])){$terminos = $_POST['terminos'];}
 
+    // validación básica
     if(strlen(trim($nombre)) >= 5 && strlen(trim($cedula)) >= 7 && strlen(trim($email)) >= 8 && strlen(trim($fechaNac)) == 10 && $telefono != "" && $genero != "" && $terminos != "" ){
-        // echo '<pre>';
-        // print_r($_POST);
-        // echo '</pre>';
+
+        // -------- INSERT --------
         if($id_persona == 0){
+
+            // validar contraseña
             if($password != $verified_password || empty($password)){
                 echo "La constraseñas no coinciden ";
                 return;
             }
+
             try{
-                $sqlInse = "INSERT INTO t_datos_personales (nombre_completo, cedula, correo, contrasena, fecha_nacimiento, telefono, genero, generos_fav )
+                $sqlInse = "INSERT INTO t_datos_personales 
+                (nombre_completo, cedula, correo, contrasena, fecha_nacimiento, telefono, genero, generos_fav )
                 VALUES(:nombre, :cedula, :email, :contrasena, :fecha_nacimiento, :telefono, :genero, :generos_fav )";
-                $passwordHash = password_hash($password, PASSWORD_DEFAULT);
+
+                $passwordHash = password_hash($password, PASSWORD_DEFAULT); // encriptar contraseña
+
                 $stmt = $pdo->prepare($sqlInse);
                 $stmt->bindParam(":nombre", $nombre);
                 $stmt->bindParam(":cedula", $cedula);
@@ -88,13 +93,18 @@ if(isset($_POST['btnRegistrarse'])){
                 $stmt->bindParam(":genero", $genero);
                 $stmt->bindParam(":generos_fav", $preferencias);
                 $stmt->execute();
+
+                // redirección
                 header("location: " .$_SERVER['PHP_SELF']. "?msg=creado");
                 exit();
-                
+
             }catch (PDOException $e){
                 echo "Error al guardar los datos. ". $e->getMessage();
             }
+
+        // -------- UPDATE --------
         }elseif($id_persona > 0){
+
             try{
                 $sqlUpt = "UPDATE t_datos_personales 
                 SET nombre_completo = :nombre_completo, 
@@ -106,14 +116,16 @@ if(isset($_POST['btnRegistrarse'])){
                 genero = :genero, 
                 generos_fav = :generos_fav
                 WHERE id_persona = :id_persona";
+
+                // si se escribe nueva contraseña
                 if(!empty($password)){
                     if($password != $verified_password){
                         echo "Las contraseñas no coinciden. ";
                         return;
                     }
                     $passwordHash = password_hash($password, PASSWORD_DEFAULT);
-                    
                 }else{
+                    // mantener contraseña actual
                     if(!isset($persona)){
                         $sql = "SELECT contrasena FROM t_datos_personales WHERE id_persona = :id";
                         $stmt = $pdo->prepare($sql);
@@ -123,8 +135,8 @@ if(isset($_POST['btnRegistrarse'])){
                     }
                     $passwordHash = $persona['contrasena'];
                 }
+
                 $stmt = $pdo->prepare($sqlUpt);
-                
                 $stmt->bindParam(":id_persona", $id_persona);
                 $stmt->bindParam(":nombre_completo", $nombre);
                 $stmt->bindParam(":cedula", $cedula);
@@ -135,19 +147,17 @@ if(isset($_POST['btnRegistrarse'])){
                 $stmt->bindParam(":genero", $genero);
                 $stmt->bindParam(":generos_fav", $preferencias);
                 $stmt->execute();
+
+                // redirección
                 header("location: " .$_SERVER['PHP_SELF'] . "?msg=actualizado");
                 exit();
-                
+
             } catch(PDOException $e){
                 echo "Algo salio mal al Actualizar los datos. " . $e->getMessage();
             }
         }
-    
     }
 }
-
-
-
 ?>
 
 
