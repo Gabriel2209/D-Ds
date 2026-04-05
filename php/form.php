@@ -260,13 +260,13 @@ if(isset($_POST['btnRegistrarse'])){
                 foreach($PERSONAS as $PERSONA){
                     echo "<tr>";
                         echo "<td><a href='?editar=".$PERSONA['id_persona']."'>Editar</a></td>";
-                        echo "<td>". htmlspecialchars($PERSONA['nombre_completo']) ."</td>";
-                        echo "<td>". htmlspecialchars($PERSONA['cedula']) ."</td>";
-                        echo "<td>". htmlspecialchars($PERSONA['correo']) ."</td>";
-                        echo "<td>".date("y-m-d",strtotime($PERSONA['fecha_nacimiento']))  ."</td>";
-                        echo "<td>". htmlspecialchars($PERSONA['telefono']) ."</td>";
-                        echo "<td>". htmlspecialchars($PERSONA['genero']) ."</td>";
-                        echo "<td>". htmlspecialchars($PERSONA['generos_fav']) ."</td>";
+                        echo "<td data-label='Nombre'>". htmlspecialchars($PERSONA['nombre_completo']) ."</td>";
+                        echo "<td data-label='Cedula'>". htmlspecialchars($PERSONA['cedula']) ."</td>";
+                        echo "<td data-label='Correo'>". htmlspecialchars($PERSONA['correo']) ."</td>";
+                        echo "<td data-label='Fecha de nacimiento'>".date("y-m-d",strtotime($PERSONA['fecha_nacimiento']))  ."</td>";
+                        echo "<td data-label='Telefono'>". htmlspecialchars($PERSONA['telefono']) ."</td>";
+                        echo "<td data-label='Genero'>". htmlspecialchars($PERSONA['genero']) ."</td>";
+                        echo "<td data-label='Preferencias'>". htmlspecialchars($PERSONA['generos_fav']) ."</td>";
                         echo "<td><a href='#' onclick='confirmarEliminar(".$PERSONA['id_persona'].")' >Eliminar</a></td>";
                     echo "</tr>";
                 }
