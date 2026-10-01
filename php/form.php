@@ -267,7 +267,7 @@ if(isset($_POST['btnRegistrarse'])){
                         echo "<td data-label='Telefono'>". htmlspecialchars($PERSONA['telefono']) ."</td>";
                         echo "<td data-label='Genero'>". htmlspecialchars($PERSONA['genero']) ."</td>";
                         echo "<td data-label='Preferencias'>". htmlspecialchars($PERSONA['generos_fav']) ."</td>";
-                        echo "<td><a href='#' onclick='confirmarEliminar(".$PERSONA['id_persona'].")' >Eliminar</a></td>";
+                        echo "<td><a href='#' onclick='FNC_CONFIRMAR_ELIMINAR(".$PERSONA['id_persona'].")' >Eliminar</a></td>";
                     echo "</tr>";
                 }
             ?>
