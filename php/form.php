@@ -6,7 +6,7 @@ $pdo = new Conn(); // instancia de la conexión
 if(isset($_GET['editar'])){
     $id = $_GET['editar']; // obtenemos el id por URL
     try{
-        $sql = "SELECT * FROM t_datos_personales WHERE id_persona = :id";
+        $sql = "SELECT * FROM t_clientes_datospersonales WHERE id_persona = :id";
         $stmt = $pdo->prepare($sql);
         $stmt->bindParam(':id',$id); // enlazamos el parámetro
         $stmt->execute();
@@ -22,7 +22,7 @@ if(isset($_GET['eliminar'])){
     $id = $_GET['eliminar']; // id a eliminar
 
     try{
-        $sql = "DELETE FROM t_datos_personales WHERE id_persona = :id";
+        $sql = "DELETE FROM t_clientes_datospersonales WHERE id_persona = :id";
         $stmt = $pdo->prepare($sql);
         $stmt->bindParam(":id", $id);
         $stmt->execute();
@@ -77,7 +77,7 @@ if(isset($_POST['btnRegistrarse'])){
             }
 
             try{
-                $sqlInse = "INSERT INTO t_datos_personales 
+                $sqlInse = "INSERT INTO t_clientes_datospersonales 
                 (nombre_completo, cedula, correo, contrasena, fecha_nacimiento, telefono, genero, generos_fav )
                 VALUES(:nombre, :cedula, :email, :contrasena, :fecha_nacimiento, :telefono, :genero, :generos_fav )";
 
@@ -106,7 +106,7 @@ if(isset($_POST['btnRegistrarse'])){
         }elseif($id_persona > 0){
 
             try{
-                $sqlUpt = "UPDATE t_datos_personales 
+                $sqlUpt = "UPDATE t_clientes_datospersonales 
                 SET nombre_completo = :nombre_completo, 
                 cedula = :cedula, 
                 correo = :correo, 
@@ -127,7 +127,7 @@ if(isset($_POST['btnRegistrarse'])){
                 }else{
                     // mantener contraseña actual
                     if(!isset($persona)){
-                        $sql = "SELECT contrasena FROM t_datos_personales WHERE id_persona = :id";
+                        $sql = "SELECT contrasena FROM t_clientes_datospersonales WHERE id_persona = :id";
                         $stmt = $pdo->prepare($sql);
                         $stmt->bindParam(":id", $id_persona);
                         $stmt->execute();
@@ -253,7 +253,7 @@ if(isset($_POST['btnRegistrarse'])){
             </tr>
             
             <?php 
-                $sql = "SELECT * FROM t_datos_personales ORDER BY nombre_completo";
+                $sql = "SELECT * FROM t_clientes_datospersonales ORDER BY nombre_completo";
                 $stmt = $pdo->prepare($sql);
                 $stmt->execute();
                 $PERSONAS = $stmt->fetchAll(PDO::FETCH_ASSOC);

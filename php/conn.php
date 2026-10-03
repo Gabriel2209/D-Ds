@@ -3,7 +3,7 @@
 class Conn extends PDO
 {
     private $hostDB = "127.0.0.1";
-    private $nameDB = "dds41";
+    private $nameDB = "clientes";
     private $userDB = "root";
     private $passDB = "";
 
