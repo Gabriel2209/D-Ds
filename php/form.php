@@ -39,39 +39,39 @@ if(isset($_GET['eliminar'])){
 if(isset($_POST['btnRegistrarse'])){
 
     // variables vacías
-    $nombre = "";
-    $cedula = "";
-    $email = "";
-    $password = "";
-    $verified_password = "";
-    $fechaNac = "";
-    $telefono = "";
-    $preferencias = "";
-    $genero = "";
-    $id_persona = 0;
-    $terminos = "";
+    $varNombre = "";
+    $varCedula = "";
+    $varEmail = "";
+    $varPassword = "";
+    $varVerifiedPassword = "";
+    $varFechaNacimiento = "";
+    $varTelefono = "";
+    $varPreferencias = "";
+    $varGenero = "";
+    $varIdPersona = 0;
+    $varTerminos = "";
 
     // capturar datos del formulario
-    if(isset($_POST['id_persona'])){$id_persona = $_POST['id_persona'];}
-    if(isset($_POST['nombre'])){ $nombre = $_POST['nombre'];}
-    if(isset($_POST['cedula'])){$cedula = $_POST['cedula'];}
-    if(isset($_POST['email'])){$email = $_POST['email'];}
-    if(isset($_POST['password'])){$password = $_POST['password'];}
-    if(isset($_POST['verified-password'])){$verified_password = $_POST['verified-password'];}
-    if(isset($_POST['fechaNac'])){$fechaNac = $_POST['fechaNac'];}
-    if(isset($_POST['telefono'])){$telefono = $_POST['telefono'];}
-    if(isset($_POST['preferencias'])){$preferencias = $_POST['preferencias'];}
-    if(isset($_POST['genero'])){$genero = $_POST['genero'];}
-    if(isset($_POST['terminos'])){$terminos = $_POST['terminos'];}
+    if(isset($_POST['id_persona'])){$varIdPersona = $_POST['id_persona'];}
+    if(isset($_POST['nombre'])){ $varNombre = $_POST['nombre'];}
+    if(isset($_POST['cedula'])){$varCedula = $_POST['cedula'];}
+    if(isset($_POST['email'])){$varEmail = $_POST['email'];}
+    if(isset($_POST['password'])){$varPassword = $_POST['password'];}
+    if(isset($_POST['verified-password'])){$varVerifiedPassword = $_POST['verified-password'];}
+    if(isset($_POST['fechaNac'])){$varFechaNacimiento = $_POST['fechaNac'];}
+    if(isset($_POST['telefono'])){$varTelefono = $_POST['telefono'];}
+    if(isset($_POST['preferencias'])){$varPreferencias = $_POST['preferencias'];}
+    if(isset($_POST['genero'])){$varGenero = $_POST['genero'];}
+    if(isset($_POST['terminos'])){$varTerminos = $_POST['terminos'];}
 
     // validación básica
-    if(strlen(trim($nombre)) >= 5 && strlen(trim($cedula)) >= 7 && strlen(trim($email)) >= 8 && strlen(trim($fechaNac)) == 10 && $telefono != "" && $genero != "" && $terminos != "" ){
+    if(strlen(trim($varNombre)) >= 5 && strlen(trim($varCedula)) >= 7 && strlen(trim($varEmail)) >= 8 && strlen(trim($varFechaNacimiento)) == 10 && $varTelefono != "" && $varGenero != "" && $varTerminos != "" ){
 
         // -------- INSERT --------
-        if($id_persona == 0){
+        if($varIdPersona == 0){
 
             // validar contraseña
-            if($password != $verified_password || empty($password)){
+            if($varPassword != $varVerifiedPassword || empty($varPassword)){
                 echo "La constraseñas no coinciden ";
                 return;
             }
@@ -81,17 +81,17 @@ if(isset($_POST['btnRegistrarse'])){
                 (nombre_completo, cedula, correo, contrasena, fecha_nacimiento, telefono, genero, generos_fav )
                 VALUES(:nombre, :cedula, :email, :contrasena, :fecha_nacimiento, :telefono, :genero, :generos_fav )";
 
-                $passwordHash = password_hash($password, PASSWORD_DEFAULT); // encriptar contraseña
+                $passwordHash = password_hash($varPassword, PASSWORD_DEFAULT); // encriptar contraseña
 
                 $stmt = $pdo->prepare($sqlInse);
-                $stmt->bindParam(":nombre", $nombre);
-                $stmt->bindParam(":cedula", $cedula);
-                $stmt->bindParam(":email", $email);
+                $stmt->bindParam(":nombre", $varNombre);
+                $stmt->bindParam(":cedula", $varCedula);
+                $stmt->bindParam(":email", $varEmail);
                 $stmt->bindParam(":contrasena", $passwordHash);
-                $stmt->bindParam(":fecha_nacimiento", $fechaNac);
-                $stmt->bindParam(":telefono", $telefono);
-                $stmt->bindParam(":genero", $genero);
-                $stmt->bindParam(":generos_fav", $preferencias);
+                $stmt->bindParam(":fecha_nacimiento", $varFechaNacimiento);
+                $stmt->bindParam(":telefono", $varTelefono);
+                $stmt->bindParam(":genero", $varGenero);
+                $stmt->bindParam(":generos_fav", $varPreferencias);
                 $stmt->execute();
 
                 // redirección
@@ -103,7 +103,7 @@ if(isset($_POST['btnRegistrarse'])){
             }
 
         // -------- UPDATE --------
-        }elseif($id_persona > 0){
+        }elseif($varIdPersona > 0){
 
             try{
                 $sqlUpt = "UPDATE t_clientes_datospersonales 
@@ -118,18 +118,18 @@ if(isset($_POST['btnRegistrarse'])){
                 WHERE id_persona = :id_persona";
 
                 // si se escribe nueva contraseña
-                if(!empty($password)){
-                    if($password != $verified_password){
+                if(!empty($varPassword)){
+                    if($varPassword != $varVerifiedPassword){
                         echo "Las contraseñas no coinciden. ";
                         return;
                     }
-                    $passwordHash = password_hash($password, PASSWORD_DEFAULT);
+                    $passwordHash = password_hash($varPassword, PASSWORD_DEFAULT);
                 }else{
                     // mantener contraseña actual
                     if(!isset($persona)){
                         $sql = "SELECT contrasena FROM t_clientes_datospersonales WHERE id_persona = :id";
                         $stmt = $pdo->prepare($sql);
-                        $stmt->bindParam(":id", $id_persona);
+                        $stmt->bindParam(":id", $varIdPersona);
                         $stmt->execute();
                         $persona = $stmt->fetch(PDO::FETCH_ASSOC);
                     }
@@ -137,15 +137,15 @@ if(isset($_POST['btnRegistrarse'])){
                 }
 
                 $stmt = $pdo->prepare($sqlUpt);
-                $stmt->bindParam(":id_persona", $id_persona);
-                $stmt->bindParam(":nombre_completo", $nombre);
-                $stmt->bindParam(":cedula", $cedula);
-                $stmt->bindParam(":correo", $email);
+                $stmt->bindParam(":id_persona", $varIdPersona);
+                $stmt->bindParam(":nombre_completo", $varNombre);
+                $stmt->bindParam(":cedula", $varCedula);
+                $stmt->bindParam(":correo", $varEmail);
                 $stmt->bindParam(":contrasena", $passwordHash);
-                $stmt->bindParam(":fecha_nacimiento", $fechaNac);
-                $stmt->bindParam(":telefono", $telefono);
-                $stmt->bindParam(":genero", $genero);
-                $stmt->bindParam(":generos_fav", $preferencias);
+                $stmt->bindParam(":fecha_nacimiento", $varFechaNacimiento);
+                $stmt->bindParam(":telefono", $varTelefono);
+                $stmt->bindParam(":genero", $varGenero);
+                $stmt->bindParam(":generos_fav", $varPreferencias);
                 $stmt->execute();
 
                 // redirección
